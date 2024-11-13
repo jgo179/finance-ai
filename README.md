@@ -1,6 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-G
+3-G-F-A-C-F-1-B
+3GFACF1B
 
 ## Getting Started
 
