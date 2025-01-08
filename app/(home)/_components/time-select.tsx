@@ -31,6 +31,7 @@ const TimeSelect = () => {
   const handleMonthChange = (month: string) => {
     push(`/?month=${month}`);
   };
+
   return (
     <Select
       onValueChange={(value) => handleMonthChange(value)}
