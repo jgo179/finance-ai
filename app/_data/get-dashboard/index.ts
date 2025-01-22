@@ -1,9 +1,6 @@
 import { db } from "@/app/_lib/prisma";
 import { TransactionType } from "@prisma/client";
-import type {
-  TotalExpensePerCategory,
-  TransactionsPercentagePerType,
-} from "./types";
+import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
 import { auth } from "@clerk/nextjs/server";
 
 export const getDashboard = async (month: string) => {
@@ -18,7 +15,6 @@ export const getDashboard = async (month: string) => {
       lt: new Date(`2025-${month}-31`),
     },
   };
-
   const depositsTotal = Number(
     (
       await db.transaction.aggregate({
@@ -27,7 +23,6 @@ export const getDashboard = async (month: string) => {
       })
     )?._sum?.amount,
   );
-
   const investmentsTotal = Number(
     (
       await db.transaction.aggregate({
@@ -36,7 +31,6 @@ export const getDashboard = async (month: string) => {
       })
     )?._sum?.amount,
   );
-
   const expensesTotal = Number(
     (
       await db.transaction.aggregate({
@@ -45,7 +39,6 @@ export const getDashboard = async (month: string) => {
       })
     )?._sum?.amount,
   );
-
   const balance = depositsTotal - investmentsTotal - expensesTotal;
   const transactionsTotal = Number(
     (
@@ -55,8 +48,7 @@ export const getDashboard = async (month: string) => {
       })
     )._sum.amount,
   );
-
-  const typesPercentage: TransactionsPercentagePerType = {
+  const typesPercentage: TransactionPercentagePerType = {
     [TransactionType.DEPOSIT]: Math.round(
       (Number(depositsTotal || 0) / Number(transactionsTotal)) * 100,
     ),
@@ -88,7 +80,7 @@ export const getDashboard = async (month: string) => {
   const lastTransactions = await db.transaction.findMany({
     where,
     orderBy: { date: "desc" },
-    take: 10,
+    take: 15,
   });
   return {
     balance,
