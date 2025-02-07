@@ -5,8 +5,8 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/app/_components/ui/select";
-import { SelectValue } from "@radix-ui/react-select";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const MONTH_OPTIONS = [
@@ -38,7 +38,7 @@ const TimeSelect = () => {
       defaultValue={month || ""}
     >
       <SelectTrigger className="w-[150px] rounded-full">
-        <SelectValue placeholder="Mês" />
+        <SelectValue placeholder={month} />
       </SelectTrigger>
       <SelectContent>
         {MONTH_OPTIONS.map((option) => (
